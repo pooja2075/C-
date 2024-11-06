@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <vector>
+using namespace std;
+
+bool ispalin(const string& str) {
+    vector<int> charcount(26, 0);
+    int oddcount = 0;
+    
+    for (char ch : str) {
+        if (isalpha(ch)) {
+            int index = tolower(ch) - 'a';
+            charcount[index]++;
+            if (charcount[index] % 2 == 1) {
+                oddcount++;
+            } else {
+                oddcount--;
+            }
+        }
+    }
+    return oddcount <= 1;
+}
+
+int main() {
+    string str = "malayala m12";
+    if (ispalin(str)) {
+        cout << "TRUE" << endl;
+    } else {
+        cout << "FALSE" << endl;
+    }
+    return 0;
+}
