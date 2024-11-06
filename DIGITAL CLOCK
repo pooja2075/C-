@@ -1,0 +1,38 @@
+#include <iostream>
+#include <iomanip>
+#include <thread>
+#include <chrono>
+
+int main() {
+    int h = 12, m = 50, s = 0;
+    
+    while (true) {
+        // Print time in hh:mm:ss format with carriage return
+        std::cout << "\r" << std::setw(2) << std::setfill('0') << h << " : " 
+                  << std::setw(2) << std::setfill('0') << m << " : " 
+                  << std::setw(2) << std::setfill('0') << s << std::flush;
+        
+        // Delay for 1 second
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        
+        // Increment seconds
+        s++;
+        
+        // Check for overflow in seconds, minutes, and hours
+        if (s == 60) {
+            s = 0;  // Reset seconds
+            m++;    // Increment minutes
+        }
+        
+        if (m == 60) {
+            m = 0;  // Reset minutes
+            h++;    // Increment hours
+        }
+        
+        if (h == 13) {
+            h = 1;  // Reset hours to 1 (for 12-hour format)
+        }
+    }
+
+    return 0;
+}
