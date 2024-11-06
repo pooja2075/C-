@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int gcd(int a, int b) {
+    int temp;
+    while (b != 0) {
+        temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+bool coprime(int a, int b) {
+    return gcd(a, b) == 1;
+}
+
+int main() {
+    int a;
+    cout << "Enter any number: ";
+    cin >> a;
+    int i, j, k;
+    for (i = 5; i <= a; i++) {
+        for (j = 4; j < i; j++) {
+            for (k = 3; k < j; k++) {
+                if ((j * j + k * k == i * i) && coprime(i, j) && coprime(j, k) && coprime(i, k)) {
+                    cout << k << " " << j << " " << i << endl;
+                }
+            }
+        }
+    }
+    return 0;
+}
