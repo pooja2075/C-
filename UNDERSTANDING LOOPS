@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, x, y;
+    
+    cout << "Enter the number of Hai: ";
+    cin >> n;
+    
+    cout << "Enter the number of rows: ";
+    cin >> x;
+    
+    cout << "Enter the number of blocks: ";
+    cin >> y;
+    
+    int totalCount = 0;  // Variable to keep track of the total number of "Hai"
+
+    for (int k = 0; k < y; k++) {
+        for (int j = 0; j < x; j++) {
+            for (int i = 0; i < n; i++) {
+                cout << "Hai ";
+                totalCount++;  // Increment the total count for each "Hai"
+            }
+            cout << endl;
+        }
+        // Print the total count of "Hai" after each block
+        cout << totalCount << endl;
+        cout << "-------------" << endl;
+    }
+
+    return 0;
+}
