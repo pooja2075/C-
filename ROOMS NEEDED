@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int pooja(vector<vector<int>>& inter) {
+    vector<int> start(inter.size());
+    vector<int> end(inter.size());
+    
+    for (int i = 0; i < inter.size(); i++) {
+        start[i] = inter[i][0];
+        end[i] = inter[i][1];
+    }
+    
+    // Sort the start and end times
+    sort(start.begin(), start.end());
+    sort(end.begin(), end.end());
+    
+    int no_room = 0;
+    int p = 0;
+    
+    for (int a : start) {
+        if (a < end[p]) {
+            no_room++;
+        } else {
+            p++;
+        }
+    }
+    
+    return no_room;
+}
+
+int main() {
+    vector<vector<int>> inter = {{0, 10}, {2, 12}, {13, 16}, {12, 13}, {17, 20}, {5, 15}, {16, 19}};
+    int room = pooja(inter);
+    cout << "The rooms needed are " << room << endl;
+    return 0;
+}
