@@ -1,0 +1,84 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main() 
+{
+    vector<char> l1, l2;
+    
+    cout << "Enter the boy name : ";
+    string b;
+    getline(cin, b);
+    
+    cout << "Enter the girl name : ";
+    string g;
+    getline(cin, g);
+    
+    for(char ch : b) 
+    {
+        l1.push_back(ch);
+    }
+    for(char ch : g) 
+    {
+        l2.push_back(ch);
+    }
+    
+    cout << "l1: ";
+    for(char ch : l1) cout << ch << " ";
+    cout << endl;
+    
+    cout << "l2: ";
+    for(char ch : l2) cout << ch << " ";
+    cout << endl;
+
+    int len1 = l1.size();
+    int len2 = l2.size();
+
+    for(int i = 0; i < len1; i++) 
+    {
+        for(int j = 0; j < len2; j++) 
+        {
+            if(l1[i] == l2[j]) 
+            {
+                l1[i] = '2';
+                l2[j] = '2';
+            }
+        }
+    }
+    
+    cout << "Updated l1: ";
+    for(char ch : l1) cout << ch << " ";
+    cout << endl;
+    
+    cout << "Updated l2: ";
+    for(char ch : l2) cout << ch << " ";
+    cout << endl;
+
+    int count = 0;
+    
+    for(char ch : l1) 
+    {
+        if(ch != '2')
+            count++;
+    }
+    for(char ch : l2) 
+    {
+        if(ch != '2')
+            count++;
+    }
+
+    vector<char> res = {'F', 'L', 'A', 'M', 'E', 'S'};
+    int index = 0;
+
+    while(res.size() > 1) 
+    {
+        index = (index + (count - 1)) % res.size();
+        res.erase(res.begin() + index);
+    }
+    
+    cout << "Result: " << res[0] << endl;
+
+    return 0;
+}
