@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> master(const int nums[], int size, int target) {
+    int s = 0;
+    int e = size - 1;
+
+    while (s < e) {
+        int sum = nums[s] + nums[e];
+        if (sum == target) {
+            return {s, e}; 
+        } else if (sum < target) {
+            s++;
+        } else {
+            e--;
+        }
+    }
+
+    return {};  // Return an empty vector if no solution is found
+}
+
+int main() {
+    int nums[] = {2, 4, 6, 11, 34, 56, 78, 100};  // Sorted array
+    int size = sizeof(nums) / sizeof(nums[0]);
+
+    cout << "Enter target number: ";
+    int tar;
+    cin >> tar;
+
+    vector<int> res = master(nums, size, tar);
+    if (res.size() == 2) {
+        cout << "Numbers found at indices: " << res[0] << " and " << res[1] << endl;
+    } else {
+        cout << "Number not found" << endl;
+    }
+
+    return 0;
+}
