@@ -1,0 +1,79 @@
+#include <iostream>
+#include <stack>
+#include <string>
+
+int precedence(char ch) {
+    switch (ch) {
+        case '+':
+        case '-':
+            return 1;
+        case '*':
+        case '/':
+            return 2;
+    }
+    return -1;
+}
+
+int operation(char op, int num1, int num2) {
+    switch (op) {
+        case '+':
+            return num1 + num2;
+        case '-':
+            return num1 - num2;
+        case '*':
+            return num1 * num2;
+        case '/':
+            return num1 / num2;
+    }
+    return -1;
+}
+
+int beast(const std::string& str) {
+    std::stack<int> num;
+    std::stack<char> symbol;
+
+    int i = 0;
+    while (i < str.length()) {
+        if (isdigit(str[i])) {
+            int a = 0;
+            while (i < str.length() && isdigit(str[i])) {
+                a = a * 10 + (str[i] - '0');
+                i++;
+            }
+            num.push(a);
+        } else if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/') {
+            while (!symbol.empty() && precedence(symbol.top()) >= precedence(str[i])) {
+                char op = symbol.top();
+                symbol.pop();
+                int num2 = num.top();
+                num.pop();
+                int num1 = num.top();
+                num.pop();
+                num.push(operation(op, num1, num2));
+            }
+            symbol.push(str[i]);
+            i++;
+        } else {
+            i++;
+        }
+    }
+
+    while (!symbol.empty()) {
+        char op = symbol.top();
+        symbol.pop();
+        int num2 = num.top();
+        num.pop();
+        int num1 = num.top();
+        num.pop();
+        num.push(operation(op, num1, num2));
+    }
+
+    return num.top();
+}
+
+int main() {
+    std::string str = "17 + 8 - 9 / 2 + 3 * 3";
+    int result = beast(str);
+    std::cout << "The result is: " << result << std::endl;
+    return 0;
+}
