@@ -1,0 +1,24 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class Main {
+
+    public static Set<Integer> createSet(int[] elements) {
+        Set<Integer> mySet = new HashSet<>();
+        
+        // Adding elements to the Set
+        for (int element : elements) {
+            mySet.add(element);
+        }
+        
+        return mySet;
+    }
+    
+    public static void main(String[] args) {
+        int[] elements = {1, 2, 3, 4, 4, 5, 6, 7, 7, 8};
+        
+        Set<Integer> uniqueElementsSet = createSet(elements);
+        
+        System.out.println("Set with unique elements: " + uniqueElementsSet);
+    }
+}
