@@ -1,0 +1,33 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+
+void csbs(int num) {
+    std::unordered_map<char, int> pooja;
+    std::string str = std::to_string(num);
+
+    for (char ch : str) {
+        pooja[ch]++;
+    }
+
+    std::cout << "{ ";
+    for (const auto& pair : pooja) {
+        std::cout << pair.first << ": " << pair.second << ", ";
+    }
+    std::cout << "}" << std::endl;
+
+    int c = 0;
+    for (const auto& pair : pooja) {
+        if (pair.second > 1) {
+            c++;
+        }
+    }
+    
+    std::cout << c << std::endl;
+}
+
+int main() {
+    int num = 98374659;
+    csbs(num);
+    return 0;
+}
