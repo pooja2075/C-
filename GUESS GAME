@@ -1,0 +1,87 @@
+#include <iostream>
+#include <vector>
+#include <set>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    srand(time(0)); // Seed for random number generation
+
+    set<int> uniqueNumbers;
+    while (uniqueNumbers.size() < 5) {
+        int number = rand() % 10 + 1;
+        uniqueNumbers.insert(number);
+    }
+
+    vector<int> randomNumbers(uniqueNumbers.begin(), uniqueNumbers.end());
+    string player1, player2;
+    
+    cout << "Enter the player 1 name: ";
+    getline(cin, player1);
+    cout << "Enter the player 2 name: ";
+    getline(cin, player2);
+
+    cout << "The computer has five integers in mind." << endl;
+    cout << "Each player has three chances to guess." << endl;
+
+    vector<int> guesses;
+    int scorePlayer1 = 0;
+    int scorePlayer2 = 0;
+
+    cout << player1 << "'s turn:" << endl;
+    for (int i = 1; i <= 3; i++) {
+        int guess;
+        cout << "Enter guess " << i << " for " << player1 << ": ";
+        cin >> guess;
+
+        while (find(guesses.begin(), guesses.end(), guess) != guesses.end()) {
+            cout << "You've already guessed that number! Enter a different number: ";
+            cin >> guess;
+        }
+        guesses.push_back(guess);
+
+        if (find(randomNumbers.begin(), randomNumbers.end(), guess) != randomNumbers.end()) {
+            cout << "Correct!" << endl;
+            scorePlayer1++;
+        } else {
+            cout << "Incorrect." << endl;
+        }
+    }
+
+    cout << player2 << "'s turn:" << endl;
+    for (int i = 1; i <= 3; i++) {
+        int guess;
+        cout << "Enter guess " << i << " for " << player2 << ": ";
+        cin >> guess;
+
+        while (find(guesses.begin(), guesses.end(), guess) != guesses.end()) {
+            cout << "You've already guessed that number! Enter a different number: ";
+            cin >> guess;
+        }
+        guesses.push_back(guess);
+
+        if (find(randomNumbers.begin(), randomNumbers.end(), guess) != randomNumbers.end()) {
+            cout << "Correct!" << endl;
+            scorePlayer2++;
+        } else {
+            cout << "Incorrect." << endl;
+        }
+    }
+
+    cout << "Game over!" << endl;
+    cout << player1 << " score: " << scorePlayer1 << endl;
+    cout << player2 << " score: " << scorePlayer2 << endl;
+
+    if (scorePlayer1 > scorePlayer2) {
+        cout << player1 << " wins!" << endl;
+    } else if (scorePlayer2 > scorePlayer1) {
+        cout << player2 << " wins!" << endl;
+    } else {
+        cout << "It's a tie!" << endl;
+    }
+
+    return 0;
+}
