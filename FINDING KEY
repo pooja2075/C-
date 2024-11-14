@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<int> extractDigits(int number) {
+    vector<int> digits;
+    while (number > 0) {
+        digits.push_back(number % 10);
+        number /= 10;
+    }
+    return digits;
+}
+
+int calculate(int ip1, int ip2, int ip3) {
+    vector<int> digits1 = extractDigits(ip1);
+    vector<int> digits2 = extractDigits(ip2);
+    vector<int> digits3 = extractDigits(ip3);
+
+    int a = *max_element(digits1.begin(), digits1.end()) +
+            *max_element(digits2.begin(), digits2.end()) +
+            *max_element(digits3.begin(), digits3.end());
+
+    int b = *min_element(digits1.begin(), digits1.end()) +
+            *min_element(digits2.begin(), digits2.end()) +
+            *min_element(digits3.begin(), digits3.end());
+
+    return a - b;
+}
+
+int main() {
+    int ip1, ip2, ip3;
+    cout << "Enter input 1: ";
+    cin >> ip1;
+    cout << "Enter input 2: ";
+    cin >> ip2;
+    cout << "Enter input 3: ";
+    cin >> ip3;
+
+    int key = calculate(ip1, ip2, ip3);
+    cout << "The key is: " << key << endl;
+
+    return 0;
+}
