@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int calculate(int num[], int size, int leo)
+{
+    int left = 0;
+    int right = size - 1;
+    int mid;
+
+    while (left <= right)
+    {
+        mid = left + (right - left) / 2;
+        if (num[mid] == leo)
+            return mid;
+        else if (leo < num[mid])
+            right = mid - 1;
+        else
+            left = mid + 1;
+    }
+    return -1;
+}
+
+int main()
+{
+    int num[] = {100, 20, 30, 40, 50, 55, 65, 75};
+    int size = sizeof(num) / sizeof(num[0]);
+
+    cout << "Enter element to find in array: ";
+    int leo;
+    cin >> leo;
+
+    int res = calculate(num, size, leo);
+    if (res != -1)
+        cout << "The element found at index " << res << endl;
+    else
+        cout << "Element not found in array" << endl;
+
+    return 0;
+}
