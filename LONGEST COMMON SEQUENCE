@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main() {
+    string str_1 = "ababaaacb";
+    string str_2 = "bababbbab";
+
+    int n1 = str_1.length();
+    int n2 = str_2.length();
+
+    // Create a 2D array for storing the LCS lengths
+    vector<vector<int>> arr(n1 + 1, vector<int>(n2 + 1, 0));
+
+    // Fill the array using dynamic programming
+    for (int i = 1; i <= n1; i++) {
+        for (int j = 1; j <= n2; j++) {
+            if (str_1[i - 1] == str_2[j - 1]) {
+                arr[i][j] = arr[i - 1][j - 1] + 1;
+            } else {
+                arr[i][j] = max(arr[i - 1][j], arr[i][j - 1]);
+            }
+        }
+    }
+
+    // Output the length of the LCS
+    cout << arr[n1][n2] << endl;
+
+    return 0;
+}
