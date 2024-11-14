@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+bool isPalindromePermutation(const string& str) {
+    int charCount[26] = {0};
+    int oddCount = 0;
+
+    for (char ch : str) {
+        if (isalpha(ch)) {
+            int index = tolower(ch) - 'a';
+            charCount[index]++;
+            if (charCount[index] % 2 == 1) {
+                oddCount++;
+            } else {
+                oddCount--;
+            }
+        }
+    }
+
+    return oddCount <= 1;
+}
+
+int main() {
+    string str = "malayala m12";
+    if (isPalindromePermutation(str)) {
+        cout << "TRUE" << endl;
+    } else {
+        cout << "FALSE" << endl;
+    }
+
+    return 0;
+}
