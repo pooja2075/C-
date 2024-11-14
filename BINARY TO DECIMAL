@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    cout << "Enter binary name: ";
+    string b;
+    cin >> b;
+
+    int d = 0;
+    int pos = 0;
+
+    for (int i = b.length() - 1; i >= 0; i--)
+    {
+        char bit = b[i];
+        if (bit == '1')
+        {
+            d += pow(2, pos);
+        }
+        pos++;
+    }
+
+    cout << "Decimal value: " << d << endl;
+    return 0;
+}
