@@ -1,0 +1,32 @@
+// bus.h
+#include <iostream>
+using namespace std;
+
+class Bus {
+private:
+    int bno;
+    bool ac;
+    int capacity;
+
+public:
+    Bus(int a, bool b, int c) : bno(a), ac(b), capacity(c) {}
+
+    int getBusNo() const {
+        return bno;
+    }
+
+    bool isAc() const {
+        return ac;
+    }
+
+    int getCapacity() const {
+        return capacity;
+    }
+
+    void display() const {
+        cout << "-----------" << endl;
+        cout << "Bus No: " << bno << endl;
+        cout << "AC: " << (ac ? "Yes" : "No") << endl;
+        cout << "Capacity: " << capacity << endl;
+    }
+};
